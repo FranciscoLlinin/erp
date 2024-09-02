@@ -1,0 +1,5 @@
+<odoo>
+    <data noupdate="1">
+        <function model="opus.config.settings" name="set_required_parameters"/>
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Agregar nuevo Grupo a Boton Validar purchase.requisition -->
+    <record model="ir.ui.view" id="view_purchase_requisition_form_buttons_inherit">
+        <field name="name">purchase.requisition.form.buttons.inherit</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="arch" type="xml">
+            <data>                 
+                <button name="action_open" position="attributes">   
+                    <attribute name="groups">ecosoft_purchase_buttons.group_purchase_validate_btn</attribute>
+                </button>                   
+            </data>                
+        </field>
+    </record>   
+        
+</odoo>

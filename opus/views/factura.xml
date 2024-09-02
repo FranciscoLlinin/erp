@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="factura_form_view">
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="opus_project_name" readonly="1"/>
+                    <field name="opus_estimate_code" readonly="1"/>
+                    <field name="opus_payment_type" readonly="1" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="factura_proveedor_tree_view">
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="invoice_partner_display_name" position="after">
+                    <field name="opus_project_name" readonly="1" />
+                    <field name="opus_estimate_code" readonly="1" />
+                    <field name="opus_payment_type" readonly="1" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

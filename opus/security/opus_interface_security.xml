@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Categoría para la interfaz con OPUS -->
+        <record model="ir.module.category" id="module_category_opus">
+            <field name="name">OPUS</field>
+            <field name="description">Permisos para la interfaz OPUS-Odoo.</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <!-- Grupos -->
+        <record id="group_opus_edit_partner_opus_code" model="res.groups">
+            <field name="name">Permite editar el campo opus_code en res.partner</field>
+            <field name="category_id" ref="opus.module_category_opus"/>
+        </record>
+
+        <record id="group_project_mvg" model="res.groups">
+            <field name="name">Valor ganado</field>
+            <field name="comment">Seguridad valor ganado</field>
+            <field name="category_id" ref="opus.module_category_opus"/>
+        </record>
+
+    </data>
+</odoo>

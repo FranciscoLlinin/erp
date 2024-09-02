@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Agregar nuevo Grupo a boton "Confirmar Pedido" en Solicitud de Presupuesto (purchase.order) -->
+    <record model="ir.ui.view" id="purchase_order_form_buttons_inherit">
+        <field name="name">purchase.order.form.buttons.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <data>                 
+                <button id="bid_confirm" position="attributes">   
+                    <attribute name="groups">ecosoft_purchase_buttons.group_purchase_confirm_btn</attribute>
+                </button>       
+                <button id="draft_confirm" position="attributes">   
+                    <attribute name="groups">ecosoft_purchase_buttons.group_purchase_confirm_btn</attribute>
+                </button>                       
+            </data>                
+        </field>
+    </record>   
+        
+    <!-- Agregar nuevo Grupo a boton "Desbloquear" en Pedido de Compra (purchase.order) -->
+    <record model="ir.ui.view" id="purchase_order_form_buttons_inherit2">
+        <field name="name">purchase.order.form.buttons.inherit2</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <data>                 
+                <button name="button_unlock" position="attributes">   
+<!--                    <attribute name="groups">purchase.group_purchase_manager, ecosoft_purchase_buttons.group_purchase_unlock_btn</attribute>-->
+                    <attribute name="groups">ecosoft_purchase_buttons.group_purchase_unlock_btn</attribute>
+                </button>                   
+            </data>                
+        </field>
+    </record>   
+</odoo>

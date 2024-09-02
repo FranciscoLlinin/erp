@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record model="ir.actions.act_window" id="action_proyecto_mvg">
+		<field name="name">Valor ganado</field>
+		<field name="res_model">project.mvg</field>
+		<field name="view_mode">list,form</field>
+	</record>
+
+	<record id="action_proyecto_mvg_payments" model="ir.actions.server">
+		<field name="name">Actualizar facturación y pagos</field>
+		<field name="type">ir.actions.server</field>
+		<field name="model_id" ref="opus.model_project_mvg"/>
+		<field name="binding_model_id" ref="opus.model_project_mvg"/>
+		<field name="state">code</field>
+		<field name="code">
+action = model.actualiza_facturas_pagos()
+		</field>
+	</record>
+
+	<record id="action_mvg_excel" model="ir.actions.server">
+		<field name="name">Enviar a Excel</field>
+		<field name="model_id" ref="model_project_mvg"/>
+		<field name="state">code</field>
+		<field name="code">
+			action = model.enviar_excel()
+		</field>
+	</record>
+
+	<menuitem id="menu_tablero_de_control"
+        name="Valor ganado"
+        parent="project.menu_main_pm"
+	     action="action_proyecto_mvg"
+        sequence="2" />
+
+
+<!--	<record id="action_proyecto_mvg_todos" model="ir.actions.server">-->
+<!--		<field name="name">Actualizar facturación y pagos 2</field>-->
+<!--		<field name="type">ir.actions.server</field>-->
+<!--		<field name="model_id" ref="opus.model_project_mvg"/>-->
+<!--		<field name="binding_model_id" ref="opus.model_project_mvg"/>-->
+<!--		<field name="state">code</field>-->
+<!--		<field name="code">-->
+<!--action = model.actualiza_facturas_pagos_todos()-->
+<!--		</field>-->
+<!--	</record>-->
+
+<!--	<menuitem id="menu_tablero_de_control_todos"-->
+<!--        name="MVG (Interno Ecosoft)"-->
+<!--        parent="project.menu_main_pm"-->
+<!--	     action="action_proyecto_mvg_todos"-->
+<!--        sequence="3" />-->
+
+<!--	<menuitem id="menu_visualizar_mvg"-->
+<!--        name="Visualizar"-->
+<!--        parent="menu_tablero_de_control"-->
+<!--        sequence="01"-->
+<!--       action="action_proyecto_mvg" />-->
+
+<!--	<menuitem id="menu_actualizar_pagos_mvg"-->
+<!--        name="Actualizar facturación y pagos"-->
+<!--        parent="menu_tablero_de_control"-->
+<!--        sequence="02"-->
+<!--       action="action_proyecto_mvg_payments" />-->
+
+
+<!--	<menuitem id="menu_enviar_excel_mvg"-->
+<!--        name="Enviar a Excel"-->
+<!--        parent="menu_tablero_de_control"-->
+<!--        sequence="03"-->
+<!--       action="action_mvg_excel" />-->
+
+
+		<record id="proyecto_mvg_view_tree" model="ir.ui.view">
+		<field name="name">Valor ganado</field>
+		<field name="model">project.mvg</field>
+		<field name="arch" type="xml">
+			<tree create="false"
+					decoration-danger="(cost_scheduled_index&lt;0.8)"
+					decoration-success="(cost_scheduled_index&gt;= 0.9)"
+				    decoration-warning="(cost_scheduled_index&lt;0.9) and (cost_scheduled_index&gt;0.8)"
+			>
+				<field name="project_id"/>
+				<field name="ev_record_date"  widget="date" options="{'format': 'dd/MM/yyyy'}"/>
+				<field name="fecha_inicio" widget="date" options="{'format': 'dd/MM/yyyy'}"/>
+				<field name="fecha_termino" widget="date" options="{'format': 'dd/MM/yyyy'}"/>
+
+				<field name="budget_at_completition"/>
+                <field name="planned_value"/>
+                <field name="earned_value"/>
+                <field name="actual_cost"/>
+				<field name="cost_variance"/>
+				<field name="scheduled_variance"/>
+				<field name="cost_performance_index"/>
+				<field name="scheduled_performance_index"/>
+				<field name="cost_scheduled_index"/>
+				<field name="estimated_at_completion"/>
+				<field name="estimated_to_completion"/>
+				<field name="variance_at_completion"/>
+				<field name="estimated_days"/>
+				<field name="estimated_end_date" widget="date" options="{'format': 'dd/MM/yyyy'}"/>
+<!--				<field name="precio_venta"/>-->
+				<field name="invoiced"/>
+				<field name="paid"/>
+				<field name="paid_difference"/>
+				<field name="advance_percent"/>
+				<field name="estimated_percent"/>
+				<field name="paid_percent"/>
+<!--				<field name="project_state"/>-->
+
+			</tree>
+		</field>
+	</record>
+
+	<record id="proyecto_mvg_form" model="ir.ui.view">
+		<field name="name">Valor ganado</field>
+		<field name="model">project.mvg</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+				<field name="project_id"/>
+				<field name="ev_record_date"  widget="date" options="{'format': 'dd/MM/yyyy'}"/>
+				<field name="fecha_inicio" widget="date" options="{'format': 'dd/MM/yyyy'}"/>
+				<field name="fecha_termino" widget="date" options="{'format': 'dd/MM/yyyy'}"/>
+
+				<field name="budget_at_completition"/>
+                <field name="planned_value"/>
+                <field name="earned_value"/>
+                <field name="actual_cost"/>
+				<field name="cost_variance"/>
+				<field name="scheduled_variance"/>
+				<field name="cost_performance_index"/>
+				<field name="scheduled_performance_index"/>
+				<field name="cost_scheduled_index"/>
+				<field name="estimated_at_completion"/>
+				<field name="estimated_to_completion"/>
+				<field name="variance_at_completion"/>
+				<field name="estimated_days"/>
+				<field name="estimated_end_date" widget="date" options="{'format': 'dd/MM/yyyy'}"/>
+<!--				<field name="precio_venta"/>-->
+				<field name="invoiced"/>
+				<field name="paid"/>
+				<field name="paid_difference"/>
+				<field name="advance_percent"/>
+				<field name="estimated_percent"/>
+				<field name="paid_percent"/>
+ 				</group>
+<!--				<group name="group_bottom">-->
+<!--					<button name="enviar_excel" type="object" string="Enviar a Excel" class="oe_highlight" />-->
+<!--                </group>-->
+			</form>
+		</field>
+	</record>
+
+</odoo>

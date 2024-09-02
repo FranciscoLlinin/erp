@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="contrato_form_view">
+            <field name="name">purchase.order.contrato.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="opus_project_name" readonly="1"/>
+                    <field name="opus_contract_code" readonly="1"/>
+               </xpath>
+                <xpath expr="//field[@name='price_subtotal']" position="after">
+                    <field name="product_qty_opus" invisible="1"/>
+                    <field name="price_unit_opus" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="contrato_list_view">
+            <field name="name">purchase.order.contrato.list</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_view_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="opus_project_name" readonly="1" />
+                    <field name="opus_contract_code" readonly="1" />
+                    <field name="opus_contract_type" readonly="1" />
+                </xpath>
+		<field name="amount_total" position="after">
+		    <field name="opus_state" readonly="1" />
+		</field>
+            </field>
+        </record>
+    </data>
+</odoo>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="0">
+    
+    <!-- Grupo a Boton Validar purchase.requisition -->
+    <record id="group_purchase_validate_btn" model="res.groups">
+        <field name="name">Puede Validar Acuerdo de Compra</field>
+        <field name="implied_ids" eval="[(4, ref('base.user_admin'))]"/>
+<!--        <field name="category_id" ref="base.module_category_purchase_management"/>-->
+        <field name="category_id" ref="base.module_category_inventory"/>
+    </record>
+
+    <!-- Grupo a Boton confirmar Pedido purchase.order -->
+    <record id="group_purchase_confirm_btn" model="res.groups">
+        <field name="name">Puede Confirmar Solicitud de Presupuesto</field>
+        <field name="implied_ids" eval="[(4, ref('base.user_admin'))]"/>
+<!--        <field name="category_id" ref="base.module_category_purchase_management"/>-->
+        <field name="category_id" ref="base.module_category_inventory"/>
+    </record>
+
+    <!-- Grupo a Boton Desbloquear purchase.order -->
+    <record id="group_purchase_unlock_btn" model="res.groups">
+        <field name="name">Puede Desbloquear Pedido de Compra</field>
+        <field name="implied_ids" eval="[(4, ref('base.user_admin'))]"/>
+<!--        <field name="category_id" ref="base.module_category_purchase_management"/>-->
+        <field name="category_id" ref="base.module_category_inventory"/>
+    </record>
+
+</data>
+</odoo>
