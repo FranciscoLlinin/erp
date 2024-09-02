@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+        <!-- Operaciones de Stock Form View Agregar boton "Solicitar Transferencia"  --> -->
+        <!-- Operaciones de Stock Form View Agregar "Cuenta y Etiqueta Analitica"  -->
+        <record model="ir.ui.view" id="view_stock_picking_inherited_05">
+            <field name="name">stock.picking.form.inherit.05</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+            
+                    <!-- Nuevo campo cuando este stock.picking se genero con boton "Solicitar Tranferencia" -->
+                    <field name="owner_id" position="after">   
+                        <field name="related_picking_id" attrs="{'invisible': [('related_picking_id', '=', False)]}" string="Movimiento de Stock relacionado"/>
+                    </field>
+                    
+                    <!-- Nuevo boton "Solicitar Transferencia -->
+                    <button name="action_assign" position="after">     
+                        <button name="action_solicitar_transferencia" 
+                                type="object" 
+                                context="{'default_related_picking_id': id, 'from_solicitar_transferencia_btn': True}" 
+                                string="Solicitar Transferencia" 
+                                attrs="{'invisible': ['|', '|',('related_picking_id', '!=', False), ('is_locked', '=', True),'&amp;',('state','not in',('confirm')),('picking_type_code','!=', 'outgoing') ]}"/>
+                    </button>  
+                    
+                    <!-- Agregar campos Cuenta / Etiqueta analitica -->                   
+                    <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
+                        <field name="read_only_analytic" invisible="1" />
+                        <field name="account_analytic_id" 
+                               attrs="{'readonly': [('read_only_analytic', '=', True)]}" 
+                               force_save="1" 
+                               groups="analytic.group_analytic_accounting"/>
+                        <field name="analytic_tag_ids" 
+                               attrs="{'readonly': [('read_only_analytic', '=', True)]}" 
+                               groups="analytic.group_analytic_tags"  
+                               widget="many2many_tags"/>
+                    </xpath> 
+            </field>
+        </record>   
+
+</odoo>

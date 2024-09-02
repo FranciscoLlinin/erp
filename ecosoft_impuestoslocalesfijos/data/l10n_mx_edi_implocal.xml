@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="l10n_mx_edi_implocal" inherit_id="l10n_mx_edi.cfdiv33">
+        <xpath expr="//*[local-name()='ImpuestosLocales']" position="attributes">
+            <attribute name="t-att-TotaldeRetenciones">format_float(record.compute_tax_total_withhold(), currency_precision)</attribute>
+            <attribute name="t-att-TotaldeTraslados">format_float(record.compute_tax_total_transferred(), currency_precision)</attribute>
+        </xpath>
+        <xpath expr="//*[local-name()='TrasladosLocales']" position="attributes">
+            <attribute name="t-att-Importe">'%.6f' % record.compute_tax_amount_v(tax)</attribute>
+        </xpath>
+        <xpath expr="//*[local-name()='RetencionesLocales']" position="attributes">
+            <attribute name="t-att-Importe">'%.6f' % record.compute_tax_amount_v(tax)</attribute>
+        </xpath>
+    </template>
+</odoo>
+

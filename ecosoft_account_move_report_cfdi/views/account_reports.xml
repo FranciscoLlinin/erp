@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="sinow_template_account_move_report"
+        string="Asiento Contable"
+        model="account.move"
+        report_type="qweb-pdf"
+        name="sinow_account_move_report.sinow_account_entries_report"
+        file="sinow_account_move_report.sinow_account_entries_report"
+    />
+</odoo>

@@ -1,0 +1,262 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ecosoft_impuestoslocalesfijos
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-28 17:55+0000\n"
+"PO-Revision-Date: 2022-04-28 15:01-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_MX\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,help:ecosoft_impuestoslocalesfijos.field_account_tax__amount_type
+msgid ""
+"\n"
+"        - Group of Taxes: The tax is a set of sub taxes.\n"
+"        - Fixed: The tax amount stays the same whatever the price.\n"
+"        - Percentage of Price: The tax amount is a % of the price:\n"
+"            e.g 100 * (1 + 10%) = 110 (not price included)\n"
+"            e.g 110 / (1 + 10%) = 100 (price included)\n"
+"        - Percentage of Price Tax Included: The tax amount is a division of "
+"the price:\n"
+"            e.g 180 / (1 - 10%) = 200 (not price included)\n"
+"            e.g 200 * (1 - 10%) = 180 (price included)\n"
+"        - Transferred Fixed: Transferred by amount\n"
+"        - Withhold Fixed: Withhold by amount\n"
+"            "
+msgstr ""
+"\n"
+"        - Grupo de impuestos: el impuesto es un conjunto de subimpuestos.\n"
+"        - Fijo: el importe del impuesto se mantiene igual sin importar el "
+"precio.\n"
+"           - Porcentaje del precio: El valor del impuesto es un % del "
+"precio:\n"
+"               Por ejemplo, 100 * (1 + 10%) = 110 (sin precio incluido)\n"
+"               Por ejemplo, 110 / (1 + 10%) = 100 (precio incluido)\n"
+"           - Porcentaje del precio del impuesto incluido: El valor del "
+"impuesto es una división del precio:\n"
+"                Por ejemplo, 180 / (1 - 10%) = 200 (sin precio incluido)\n"
+"                Por ejemplo, 200 * (1-10%) = 180 (precio incluido)\n"
+"           -Traslados fijos: Traslados por importe\n"
+"          -Retenciones fijas: Retenciones por importe\n"
+"            "
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.provimex_view_tax_form
+msgid ""
+"<span class=\"o_form_label oe_inline\" attrs=\"{'invisible':"
+"[('amount_type','=','fixed')]}\">%\n"
+"                                    </span>"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.provimex_view_tax_form
+msgid "Account Tax"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.provimex_view_tax_form
+msgid "Advanced Options"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.wizard_account_tax_local_form
+msgid "Cancelar"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.provimex_view_tax_form
+msgid "Children Taxes"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_local__create_uid
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_wizard_account_tax_local__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_local__create_date
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_wizard_account_tax_local__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.provimex_view_tax_form
+msgid "Definition"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_local__display_name
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_wizard_account_tax_local__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.provimex_view_tax_form
+msgid "Distribution for Credit Notes"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.provimex_view_tax_form
+msgid "Distribution for Invoices"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model,name:ecosoft_impuestoslocalesfijos.model_account_edi_format
+msgid "EDI format"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_wizard_account_tax_local__parent_state
+msgid "Estado"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax__amount_type__fixed
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax_template__amount_type__fixed
+msgid "Fixed"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax__amount_type__group
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax_template__amount_type__group
+msgid "Group of Taxes"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.wizard_account_tax_local_form
+msgid "Guardar"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_local__id
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_wizard_account_tax_local__id
+msgid "ID"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_local__amount
+msgid "Importe"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_local__tax_id
+msgid "Impuesto"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.wizard_account_tax_local_form
+msgid "Impuesto locales"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.wizard_account_tax_local_form
+msgid "Impuestos"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_move_line__tax_local_ids
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_wizard_account_tax_local__tax_local_ids
+#: model_terms:ir.ui.view,arch_db:ecosoft_impuestoslocalesfijos.provimex_view_move_form
+msgid "Impuestos locales"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model,name:ecosoft_impuestoslocalesfijos.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model,name:ecosoft_impuestoslocalesfijos.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_local____last_update
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_wizard_account_tax_local____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_local__write_uid
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_wizard_account_tax_local__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_local__write_date
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_wizard_account_tax_local__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_wizard_account_tax_local__name
+msgid "Linea"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_local__line_id
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_local__line_tax_id
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_wizard_account_tax_local__line_id
+msgid "Línea"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax__amount_type__percent
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax_template__amount_type__percent
+msgid "Percentage of Price"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax__amount_type__division
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax_template__amount_type__division
+msgid "Percentage of Price Tax Included"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model,name:ecosoft_impuestoslocalesfijos.model_account_tax
+msgid "Tax"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax__amount_type
+#: model:ir.model.fields,field_description:ecosoft_impuestoslocalesfijos.field_account_tax_template__amount_type
+msgid "Tax Computation"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model,name:ecosoft_impuestoslocalesfijos.model_account_tax_template
+msgid "Templates for Taxes"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax__amount_type__transferred
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax_template__amount_type__transferred
+msgid "Transferred Fixed"
+msgstr "Traslados fijos"
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax__amount_type__withhold
+#: model:ir.model.fields.selection,name:ecosoft_impuestoslocalesfijos.selection__account_tax_template__amount_type__withhold
+msgid "Withhold Fixed"
+msgstr "Retenciones fijas"
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model,name:ecosoft_impuestoslocalesfijos.model_account_tax_local
+msgid "account.tax.local"
+msgstr ""
+
+#. module: ecosoft_impuestoslocalesfijos
+#: model:ir.model,name:ecosoft_impuestoslocalesfijos.model_wizard_account_tax_local
+msgid "wizard.account.tax.local"
+msgstr ""

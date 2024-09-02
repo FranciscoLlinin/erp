@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="l10n_mx_edi_implocal" inherit_id="l10n_mx_edi.cfdiv33">
+        <xpath expr="//t[@t-set='tax_detail_transferred']" position="after">
+            <t t-set="taxes_line" t-value="line.filtered('price_subtotal').tax_ids.flatten_taxes_hierarchy()"/>
+            <t t-set="taxes_line"
+               t-value="taxes_line.filtered(lambda r: r.invoice_repartition_line_ids.tag_ids and r.invoice_repartition_line_ids.tag_ids[0].name.lower() != 'local')"/>
+            <t t-set="price" t-value="line.price_unit * (1.0 - (line.discount or 0.0) / 100.0)"/>
+            <t t-set="tax_line"
+               t-value="{tax['id']: tax for tax in taxes_line.compute_all(price, line.currency_id, line.quantity, line.product_id, line.partner_id, is_refund=record.move_type in ('in_refund', 'out_refund'))['taxes']}"/>
+            <t t-set="transferred" t-value="taxes_line.filtered(lambda r: r.amount &gt;= 0)"/>
+            <t t-set="withholding" t-value="taxes_line.filtered(lambda r: r.amount &lt; 0)"/>
+
+<!--            <t t-set="tax_detail_transferred"-->
+<!--               t-value="tax_details_transferred['invoice_line_tax_details'][line] .filtered(lambda r: r.invoice_repartition_line_ids.tag_ids and r.invoice_repartition_line_ids.tag_ids[0].name.lower() != 'local')"/>-->
+<!--            <t t-set="tax_detail_withholding" t-value="tax_details_withholding['invoice_line_tax_details'][line]"/>-->
+
+        </xpath>
+
+        <xpath expr="//*[local-name()='Conceptos']" position="after">
+<!--            <t t-set="transferred_local"-->
+<!--               t-value="[value for value in record.invoice_line_ids.mapped('tax_ids').filtered(lambda r: r.invoice_repartition_line_ids.filtered(lambda rep: rep.tag_ids and rep.tag_ids[0].name.lower() == 'local') and r.amount &gt;= 0)]"/>-->
+<!--            <t t-set="withholding_local"-->
+<!--               t-value="[value for value in record.invoice_line_ids.mapped('tax_ids').filtered(lambda r: r.invoice_repartition_line_ids.filtered(lambda rep: rep.tag_ids and rep.tag_ids[0].name.lower() == 'local') and r.amount &lt; 0)]"/>-->
+
+
+                <t t-set="total_transferred_local" t-value="record.get_total_local_transferred()"/>
+                <t t-set="total_withhold_local" t-value="record.get_total_local_withhold()"/>
+
+            <t t-set="transferred_local"
+               t-value="[value for value in record.invoice_line_ids.mapped('tax_ids').filtered(lambda r: r.amount_type == 'transferred' or (r.invoice_repartition_line_ids.filtered(lambda rep: rep.tag_ids and rep.tag_ids[0].name.lower() == 'local') and r.amount &gt; 0 and r.amount_type != 'withhold'))]"/>
+            <t t-set="withholding_local"
+               t-value="[value for value in record.invoice_line_ids.mapped('tax_ids').filtered(lambda r: r.amount_type == 'withhold' or (r.invoice_repartition_line_ids.filtered(lambda rep: rep.tag_ids and rep.tag_ids[0].name.lower() == 'local') and r.amount &lt; 0 and r.amount_type != 'transferred') )]"/>
+
+            <!--            <t t-set="transferred" t-value="[value for value in record.invoice_line_ids.mapped('tax_ids').filtered(lambda r: r.invoice_repartition_line_ids.filtered(lambda rep: rep.tag_ids and rep.tag_ids[0].name.lower() != 'local') and r.amount &gt;= 0)]"/>-->
+            <!--            <t t-set="withholding" t-value="[value for value in record.invoice_line_ids.mapped('tax_ids').filtered(lambda r: r.invoice_repartition_line_ids.filtered(lambda rep: rep.tag_ids and rep.tag_ids[0].name.lower() != 'local') and r.amount &lt; 0)]"/>-->
+
+
+
+
+<!--            <t t-set="total_transferred_local"-->
+<!--               t-value="sum((float(value.amount) / 100) * float(record.amount_untaxed) for value in transferred_local) or 0.00"/>-->
+<!--            <t t-set="total_withhold_local"-->
+<!--               t-value="sum((abs(float(value.amount)) / 100) * float(record.amount_untaxed) for value in withholding_local) or 0.00"/>-->
+            <t t-set="total_transferred"
+               t-value="sum((float(value.amount) / 100) * float(record.amount_untaxed) for value in transferred) or 0.00"/>
+            <t t-set="total_withhold"
+               t-value="sum((abs(float(value.amount)) / 100) * float(record.amount_untaxed) for value in withholding) or 0.00"/>
+            <!--            <t t-set="taxes" t-value="{-->
+            <!--                'total_withhold': taxes['total_withhold'] - total_withhold_local,-->
+            <!--                'total_transferred': taxes['total_transferred'] - total_transferred_local,-->
+            <!--                 'withholding': [value for value in taxes['withholding'] if value['name'].lower() != 'local'] if taxes['withholding'] else taxes['withholding'],-->
+            <!--                 'transferred': [value for value in taxes['transferred'] if value['name'].lower() != 'local'] if taxes['transferred'] else taxes['transferred']}"/>-->
+        </xpath>
+        <!--        ==============================================================================================-->
+<!--        <xpath expr="(//*[local-name()='Traslado'])[2]" position="before">-->
+<!--            &lt;!&ndash;            <t t-set="local_amount_transferred" t-value="sum(abs(value.amount) for value in transferred_local if abs(value.amount) == transferred['rate']) / 100 * record.amount_untaxed"/>&ndash;&gt;-->
+<!--            <t t-set="local_amount_transferred"-->
+<!--               t-value="sum(abs(value.amount) for value in transferred_local if abs(value.amount) == abs(transferred['amount'])) / 100 * record.amount_untaxed"/>-->
+<!--        </xpath>-->
+<!--        <xpath expr="(//*[local-name()='Traslado'])[2]" position="attributes">-->
+<!--            &lt;!&ndash;            <attribute name="t-att-Importe">format_float(transferred['amount'] - local_amount_transferred if local_amount_transferred else transferred['amount'], currency_precision) or 0.00</attribute>&ndash;&gt;-->
+<!--            <attribute name="t-att-Importe">0.16</attribute>-->
+<!--        </xpath>-->
+<!--        <xpath expr="(//*[local-name()='Retencion'])[2]" position="before">-->
+<!--            <t t-set="local_amount_withhold"-->
+<!--               t-value="sum(abs(value.amount) for value in withholding_local if abs(value.amount) == abs(withhold['amount'])) / 100 * record.amount_untaxed"/>-->
+<!--        </xpath>-->
+<!--        <xpath expr="(//*[local-name()='Retencion'])[2]" position="attributes">-->
+<!--            <attribute name="t-att-Importe">format_float(withhold['amount'] - local_amount_withhold if-->
+<!--                local_amount_withhold else withhold['amount'], currency_precision) or 0.00-->
+<!--            </attribute>-->
+<!--        </xpath>-->
+<!--        -->
+
+        <xpath expr="*" position="inside">
+            <t t-if="record.invoice_line_ids.mapped('tax_ids.invoice_repartition_line_ids').filtered(lambda r: r. tag_ids and r.tag_ids[0].name.lower() == 'local')">
+                <cfdi:Complemento
+                        xmlns:cfdi="http://www.sat.gob.mx/cfd/3"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <implocal:ImpuestosLocales
+                            xsi:schemaLocation="http://www.sat.gob.mx/implocal http://www.sat.gob.mx/sitio_internet/cfd/implocal/implocal.xsd"
+                            xmlns:implocal="http://www.sat.gob.mx/implocal"
+                            version="1.0"
+                            t-att-TotaldeRetenciones="format_float(total_withhold_local, currency_precision)"
+                            t-att-TotaldeTraslados="format_float(total_transferred_local, currency_precision)">
+                        <t t-if="transferred_local">
+                            <t t-foreach="transferred_local" t-as="tax">
+                                                                <implocal:TrasladosLocales
+                                                                 t-att-ImpLocTrasladado="tax.name"
+                                                                 t-att-TasadeTraslado="'%.6f' % round(abs(tax.amount), 2)"
+                                                                 t-att-Importe="'%.2f' % (record.get_tax_amount(tax))"
+                                                                />
+                            </t>
+                        </t>
+<!--                                                                 t-att-Importe="'%.2f' % (abs(tax.amount) / 100 * float(record.amount_untaxed)) "-->
+
+                        <t t-if="withholding_local">
+                            <t t-foreach="withholding_local" t-as="tax">
+                                <implocal:RetencionesLocales
+                                        t-att-ImpLocRetenido="tax.name"
+                                        t-att-TasadeRetencion="'%.6f' % round(abs(tax.amount), 2)"
+                                        t-att-Importe="'%.2f' % (record.get_tax_amount(tax))"
+                                />
+                            </t>
+                        </t>
+<!--                                                                t-att-Importe="'%.2f' % (abs(tax.amount) / 100 * float(record.amount_untaxed)) "-->
+
+                    </implocal:ImpuestosLocales>
+                </cfdi:Complemento>
+            </t>
+        </xpath>
+<!--        <xpath expr="//*[name()='cfdi:Comprobante']" position="attributes" t-if="record.l10n_mx_edi_origin">-->
+<!--            <attribute name="t-att-xmlns__implocal">"http://www.sat.gob.mx/implocal" if record.invoice_line_ids.mapped('tax_ids.invoice_repartition_line_ids').filtered(lambda r: r. tag_ids and r.tag_ids[0].name.lower() == 'local') else False</attribute>-->
+<!--        </xpath>-->
+    </template>
+</odoo>

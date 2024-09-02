@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_invoice_analytic_opus_search" model="ir.ui.view">
+        <field name="name">Buscar cuenta analítica</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <separator/>
+             <field name="date" position="after">
+                 <field name="analytic_account_id"/>
+                 <filter name="filter_analytic_account_id" string="Cuenta analìtica" domain="[('analytic_account_id','&lt;&gt;','')]"/>
+                </field>
+        </field>
+    </record>
+
+</odoo>

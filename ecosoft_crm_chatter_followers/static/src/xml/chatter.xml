@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <!--
+        Chatter composer
+
+        @param {mail.composer.Chatter} widget
+    -->
+
+    <t t-extend="mail.chatter.Composer">
+        <!-- List of followers ** By default always unchecked -->
+        <t t-jquery=".o_composer_suggested_partners" t-operation="replace">
+                <div class="o_composer_suggested_partners">
+                    <t t-foreach='widget.suggestedPartners' t-as='recipient'>
+                        <div t-attf-title="Add as recipient and follower (reason: #{recipient.reason})">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox"
+                                       class="custom-control-input"
+                                       t-attf-id="o_composer_suggested_partners_p#{recipient_index}"
+                                       t-att-checked="recipient.checked and widget.Checked ? 'checked' : undefined"
+                                       t-att-data-fullname="recipient.full_name"/>
+                                <label t-attf-for="o_composer_suggested_partners_p#{recipient_index}" class="custom-control-label">
+                                    <t t-esc="recipient.name"/>
+                                    <t t-if="recipient.email_address">(<t t-esc="recipient.email_address"/>)</t>
+                                </label>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+    </t>
+
+
+</templates>

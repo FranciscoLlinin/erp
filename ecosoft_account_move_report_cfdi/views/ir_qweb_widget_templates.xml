@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="contact" inherit_id="base.contact">
+    <xpath expr="//address/div/div" position="before">
+        <div t-if="object.vat and 'vat' in fields" 
+            class='css_editable_mode_hidden'>
+            <div itemprop="vat" t-esc="object.vat" />
+        </div>
+   </xpath>
+</template>
+ 
+</odoo>

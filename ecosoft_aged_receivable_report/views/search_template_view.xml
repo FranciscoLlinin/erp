@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- Drop Down Monedas (Historico Accounting->Reporting->Partner Reports->Aged Receivable) -->
+        <template id="search_template_currencies">
+			<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+				<span class="fa fa-dollar"/>
+				Monedas:
+				<t t-set="selected_currency" t-value="', '.join(currency.get('name') for currency in options['currencies'] if currency.get('selected'))"/>
+				<t t-if="selected_currency">
+					<t t-esc="selected_currency"/>
+				</t>
+				<t t-else="">
+					All
+				</t>
+			</a>
+			<div class="dropdown-menu o_filters_menu" role="menu">
+				<t t-foreach="options['currencies']" t-as="j">
+					<a role="menuitem" class="dropdown-item js_account_report_choice_filter" t-att-title="j.get('name')" t-att-data-id="j.get('id')" data-filter="currencies"><t t-esc="j.get('name')"/></a>
+				</t>
+			</div>
+		</template>
+		
+        <template id="search_template_inherited_1" inherit_id="account_reports.search_template">
+            <xpath expr="//div[@class='btn-group dropdown o_account_reports_filter_analytic']" position="after">
+                <!-- Agregar filtro para Monedas (currencies) -->
+                <div class="btn-group dropdown o_account_reports_filter_date_cmp" t-if="options.get('currencies') != None and options.get('report_type') == 'receivable'">
+                    <t t-call="ecosoft_aged_receivable_report.search_template_currencies"/>
+                </div>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

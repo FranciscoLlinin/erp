@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- Inherit cost report (from module mrp_account) -->
+        <template id="report_mrp_cost_structure_inherit_demo" inherit_id="mrp_account_enterprise.mrp_cost_structure">
+            <xpath expr="//table[1]" position="after">	
+                <t t-set="tot_purchase_cost" t-value="0.0"/>
+                <!-- Cost of Operations table -->
+                <t t-if="line['purchase_orders_cost']">
+                    <h3>Costo de servicios externos</h3>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th><span>Referencia</span></th>
+                                <th><span>Proveedor</span></th>
+                                <th colspan="2"><span>Servicio</span></th>
+                                <th class="text-right"><span>Coste Total</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="line['purchase_orders_cost']" t-as="po">
+                                <td>
+                                    <span t-esc="po['reference'] or ''"/>
+                                </td>
+                                <td>
+                                    <span t-esc="po['partner_name'] or ''"/>
+                                </td>
+                                <td colspan="2">
+                                    <span t-esc="po['product_name'] or ''"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="po['total_cost']" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                </td>                              
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="4" class="text-right">
+                                    <strong>Costo total de los servicios externos</strong>
+                                </td>
+                                <td class="text-right">
+                                    <strong t-esc="line['purchase_order_total_cost']" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                    <t t-set="tot_purchase_cost" t-value="line['purchase_order_total_cost']"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+            </xpath>
+            
+            <!-- Replace Cost table para incluir costo de Purchase Orders (Servicios externos) -->
+            <xpath expr="//div[hasclass('row')]" position="replace"> 
+                <div class="row">
+                    <div class="col-6 offset-6">
+                        <table class="table table-sm">
+                            <tr t-if="line['mo_qty'] &gt; 1">
+                                <td class="text-right">
+                                    <strong>Costo por <t t-esc="line['mo_qty']"/> <t t-esc="line['mo_uom'].name"/></strong>
+                                </td>
+                                <td class="text-right">
+                                    <strong t-esc="line['total_cost'] + opcost + tot_purchase_cost" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">
+                                    <strong>Unit Cost</strong>
+                                </td>
+                                <th class="text-right">
+                                    <strong t-esc="(line['total_cost'] + opcost + tot_purchase_cost) / line['mo_qty']" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>            
+                </div>            
+            </xpath>
+            
+	    </template>
+    </data>
+    
+</odoo>

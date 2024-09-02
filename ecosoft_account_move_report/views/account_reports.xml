@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="ecosoft_template_account_move_report"
+        string="Asiento Contable"
+        model="account.move"
+        report_type="qweb-pdf"
+        name="ecosoft_account_move_report.ecosoft_account_entries_rpt"
+        file="ecosoft_account_move_report.ecosoft_account_entries_rpt"
+    />
+</odoo>

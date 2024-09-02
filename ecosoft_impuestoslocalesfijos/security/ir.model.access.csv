@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ecosoft_impuestoslocalesfijos,ecosoft_impuestoslocalesfijos,model_account_tax_local,base.group_user,1,1,1,1
+access_ecosoft_impuestoslocalesfijos_ingreso,ecosoft_impuestoslocalesfijos_imgreso,model_wizard_account_tax_local,base.group_user,1,1,1,1

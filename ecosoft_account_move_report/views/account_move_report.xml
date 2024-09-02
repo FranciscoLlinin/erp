@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="ecosoft_account_entries_rpt" name="Entries Report">
+        <t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="ecosoft_account_move_report.external_layout_custom">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <br/>
+                        <div class="row">
+                            <div class="col-6">
+                                <div>
+                                    <td>Journal Entries:</td>
+                                    <span t-field="o.name"/>
+                                </div>
+                                <div>
+                                    <td>Reference:</td>
+                                    <span t-field="o.ref"/>
+                                </div>
+                                <div>
+                                    <td>Date:</td>
+                                    <span t-field="o.date"/>
+                                </div>
+                                <div>
+                                    <h4>To Review:</h4>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p>Printing Date: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/></p>
+                            </div>
+                        </div>
+                        <t t-if="o.line_ids">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr style="font-size:8pt; background-color:#dcdcdc; color:#000000; font-weight: bold;">
+                                        <th>Invoice</th>
+                                        <th>Name</th>
+                                        <th>Partner</th>
+                                        <th>Account</th>
+                                        <th>Due date</th>
+                                        <th class="text-right">Debit</th>
+                                        <th class="text-right">Credit</th>
+                                        <th>Analytic account</th>
+                                        <t t-if="o.line_ids.mapped('currency_id')">
+                                            <th class="text-right">Amount Currency</th>
+                                        </t>
+                                        <th>Currency</th>
+                                        <th>Reconcile</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.line_ids" t-as="l" style="font-size:12pt;">
+                                        <td><span t-field="l.move_id.name"/></td>
+                                        <td><span t-field="l.name"/></td>
+                                        <td><span t-field="l.partner_id"/></td>
+                                        <td><span t-field="l.account_id"/></td>
+                                        <td><span t-field="l.date_maturity"/></td>
+                                        <td class="text-right">
+                                            <span t-field="l.debit"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="l.credit"/>
+                                        </td>
+                                        <td><span t-field="l.analytic_account_id"/></td>
+                                        <t t-if="l.currency_id">
+                                            <td class="text-right">
+                                                <span t-field="l.amount_currency"/>
+                                            </td>
+                                        </t>
+                                        <td><span t-field="(l.currency_id or l.company_id.currency_id).name"/></td>
+                                        <td><span t-field="l.full_reconcile_id.name"/></td>
+                                    </tr>
+                                    <tr style="font-size:12pt; background-color:#dcdcdc">
+                                        <td colspan="5"/>
+                                        <td class="text-right"><strong><span t-esc="total_debit_credit[o.id]['sum_tot_debit']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></strong></td>
+                                        <td class="text-right"><strong><span t-esc="total_debit_credit[o.id]['sum_tot_credit']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></strong></td>
+                                        <td colspan="7"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+							<!-- CFDi relacionados al account.invoice de este account.move -->
+							<t t-if="len(invoices[o.id]) &gt; 0">
+								<div class="row">
+									<div class="col-6">
+										<div>
+											<h4>CFDI asociado:</h4>
+										</div>
+									</div>
+								</div>
+								<table class="table table-condensed">
+									<thead>
+                                        <tr style="font-size:8pt; background-color:#dcdcdc; color:#000000; font-weight: bold;">
+											<th>Emision</th>
+											<th>Serie</th>
+											<th>Folio</th>
+											<th>UUID</th>
+											<th>RFC</th>
+											<th>Razon Social</th>
+											<th>Total</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr t-foreach="invoices[o.id]" t-as="i" style="font-size:12pt;">
+ 											<td><span t-esc="i.l10n_mx_edi_cfdi_date_invoice"/></td>
+											<td><span t-esc="i.l10n_mx_edi_cfdi_serie"/></td>
+											<td><span t-esc="i.l10n_mx_edi_cfdi_folio"/></td>
+											<td><span t-esc="i.l10n_mx_edi_cfdi_uuid"/></td>
+											<td><span t-if="i.move_type == 'out_invoice'" t-esc="i.l10n_mx_edi_cfdi_customer_rfc"/>
+												<span t-if="i.move_type == 'in_invoice'" t-esc="i.l10n_mx_edi_cfdi_supplier_rfc"/></td>
+											<td><span t-if="i.move_type == 'out_invoice'" t-esc="i.l10n_mx_edi_cfdi_customer_name"/>
+												<span t-if="i.move_type == 'in_invoice'" t-esc="i.l10n_mx_edi_cfdi_supplier_name"/></td>
+											<td><span t-esc="i.l10n_mx_edi_cfdi_amount" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+										</tr>
+									</tbody>
+								</table>
+							</t>
+                        </t>
+                        <div t-if="o_index &lt; len(docs)">
+                            <p style="page-break-before:always;"> </p>
+                        </div>
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
